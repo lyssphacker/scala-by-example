@@ -1,3 +1,4 @@
+// exercise 4.1.2
 import org.slf4s.LoggerFactory
 
 import scala.math.{abs, pow}
