@@ -8,4 +8,8 @@ def product(f: Int => Int)(a: Int, b: Int): Int = {
   iter(a, 1)
 }
 
-product(x => x)(1, 10)
+// exercise 5.2.3
+
+def factorial(n: Int) = product(x => x)(1, n)
+
+factorial(10)
