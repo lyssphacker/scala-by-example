@@ -1,3 +1,5 @@
+// exercise 5.2.1
+
 def sum(f: Int => Int)(a: Int, b: Int): Int = {
   def iter(a: Int, result: Int): Int = {
     if (a > b) result
