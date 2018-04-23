@@ -41,7 +41,7 @@ class NonEmptySet(val elem: Int, val left: IntSet, val right: IntSet) extends In
   def union(s: IntSet): IntSet = {
     def unionIter(s: IntSet, result: IntSet): IntSet = {
       if (s.isLeaf) result incl s.elem
-      else new NonEmptySet(s.elem, unionIter(s.left, result incl s.elem), unionIter(s.right, result incl s.elem))
+      else new NonEmptySet(s.elem, unionIter(s.left, result incl s.elem), unionIter(s.right, result))
     }
     unionIter(s, this)
   }
@@ -52,6 +52,7 @@ class NonEmptySet(val elem: Int, val left: IntSet, val right: IntSet) extends In
 }
 
 val s1 = new NonEmptySet(1, new EmptySet, new EmptySet)
+val s11 = new NonEmptySet(2, new EmptySet, new EmptySet)
 val s2 = new NonEmptySet(2, new NonEmptySet(3, new EmptySet, new EmptySet), new EmptySet)
 
-val s3 = s1 union s2
+val s3 = s1 union s11
