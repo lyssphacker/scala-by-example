@@ -1,3 +1,4 @@
+// exercises 6.0.1 and 6.0.2
 trait IntSet {
   def elem: Int
   def left: IntSet
