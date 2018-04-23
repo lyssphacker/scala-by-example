@@ -7,6 +7,7 @@ trait IntSet {
   def union(s: IntSet): IntSet
   def intersection(s: IntSet): IntSet
   def isEmpty: Boolean
+  def excl(x: Int): IntSet
 }
 
 class EmptySet extends IntSet {
@@ -27,6 +28,8 @@ class EmptySet extends IntSet {
   override def isEmpty = true
 
   override def toString: String = ""
+
+  override def excl(x: Int) = this
 }
 
 class NonEmptySet(val elem: Int, val left: IntSet, val right: IntSet) extends IntSet {
@@ -67,6 +70,19 @@ class NonEmptySet(val elem: Int, val left: IntSet, val right: IntSet) extends In
   override def isEmpty = false
 
   override def toString: String = s"$elem ${left.toString} ${right.toString}"
+
+  override def excl(x: Int) = {
+    def exclIter(s: IntSet, result: IntSet): IntSet = {
+      if (s.isEmpty) result
+      else {
+        val leftResult =
+          if (s.elem != x) exclIter(s.left, result incl s.elem)
+          else exclIter(s.left, result)
+        exclIter(s.right, leftResult)
+      }
+    }
+    exclIter(this, new EmptySet)
+  }
 }
 
 val s1 = new NonEmptySet(1, new EmptySet, new EmptySet)
@@ -74,5 +90,8 @@ val s2 = new NonEmptySet(2, new EmptySet, new EmptySet)
 val s21 = s2 incl 3 incl 4 incl 5 incl 1
 val s11 = s1 incl 6 incl 7 incl 1
 val s3 = s11 intersection  s21
+
+s21.excl(1)
+s11.excl(6)
 
 
