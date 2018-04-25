@@ -33,7 +33,7 @@ object Zero extends Integer {
 }
 
 class Succ(x: Integer) extends Integer {
-  override def isZero = false
+  override def isZero = x.successor.isZero
 
   override def predecessor = x
 
@@ -51,7 +51,7 @@ class Succ(x: Integer) extends Integer {
 }
 
 class Pred(x: Integer) extends Integer {
-  override def isZero = false
+  override def isZero = x.predecessor.isZero
 
   override def predecessor = new Pred(this)
 
@@ -68,4 +68,4 @@ class Pred(x: Integer) extends Integer {
   override def toString = x.toString + "-1"
 }
 
-Zero - new Pred(Zero)
+new Succ(new Pred(Zero)).isZero
