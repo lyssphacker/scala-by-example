@@ -1,3 +1,5 @@
+// exercise 6.0.3 - not finished (task is not clear)
+
 abstract class Integer {
   def isZero: Boolean
 
