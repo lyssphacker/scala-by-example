@@ -23,7 +23,16 @@ object Zero extends Integer {
 
   override def +(that: Integer): Integer = that
 
-  override def -(that: Integer): Integer = if (that.isZero) Zero else new Pred(that.predecessor)
+  override def -(that: Integer): Integer = {
+    def iter(i: Integer, count: Integer): Integer = {
+      println("i: " + i + " count: " + count)
+      if (count.isZero) i
+      else if (that.isInstanceOf[Succ]) iter(new Pred(i), new Pred(count))
+      else iter(new Succ(i), new Succ(count))
+    }
+    iter(Zero, that)
+  }
+
 
   override def isPositive = false
 
@@ -68,4 +77,25 @@ class Pred(x: Integer) extends Integer {
   override def toString = x.toString + "-1"
 }
 
-new Succ(new Pred(Zero)).isZero
+new Succ(new Succ(Zero)).isZero
+
+//Zero - new Succ(new Succ(Zero))
+
+//Zero - new Pred(Zero)
+
+//Zero - new Succ(Zero)
+
+//new Succ(Zero).isZero
+
+//new Succ(Zero).negate
+//new Succ(new Succ(Zero)).negate
+//new Succ(Zero).successor.negate
+
+//Zero - new Succ(new Succ(Zero))
+//Zero - new Succ(Zero)
+//new Succ(Zero).successor
+
+//new Succ(Zero).predecessor.isZero
+//new Pred(Zero).successor.isZero
+//new Succ(Zero).isZero
+//new Succ(Zero).predecessor.isZero
