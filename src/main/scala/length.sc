@@ -1,3 +1,5 @@
+// exercise 9.2.1
+
 def length(lst: List[Int]): Int = {
   def lengthIter(l: List[Int], result: Int): Int = {
     l match {
