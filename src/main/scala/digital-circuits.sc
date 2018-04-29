@@ -57,11 +57,11 @@ class Simulation {
 
   def orGate1(a1: Wire, a2: Wire, output: Wire): Unit = {
     def orAction() {
-      val a1Sig = a1.getSignal
-      val a2Sig = a2.getSignal
-      val andOutput = new Wire
-      andGate(a1, a2, andOutput)
-      inverter(andOutput, output)
+      val inverterOutput1 = new Wire
+      val inverterOutput2 = new Wire
+      inverter(a1, inverterOutput1)
+      inverter(a2, inverterOutput2)
+      andGate(inverterOutput1, inverterOutput2, output)
     }
 
     a1 addAction orAction
